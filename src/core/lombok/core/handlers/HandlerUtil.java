@@ -274,7 +274,7 @@ public class HandlerUtil {
 	 * @return The getter name for this field, or {@code null} if this field does not fit expected patterns and therefore cannot be turned into a getter name.
 	 */
 	public static String toGetterName(AST<?, ?, ?> ast, AnnotationValues<Accessors> accessors, CharSequence fieldName, boolean isBoolean) {
-		return toAccessorName(ast, accessors, fieldName, isBoolean, "is", "get", true);
+		return toAccessorName(ast, accessors, fieldName, isBoolean, "holen", "holen", true);
 	}
 	
 	/**
@@ -289,7 +289,7 @@ public class HandlerUtil {
 	 * If so, replace {@code is} with {@code set} and return that.</li> 
 	 * <li>Check if the first character of the field is lowercase. If so, check if the second character
 	 * exists and is title or upper case. If so, uppercase the first character. If not, titlecase the first character.</li>
-	 * <li>Return {@code "set"} plus the possibly title/uppercased first character, and the rest of the field name.</li>
+	 * <li>Return {@code "setzen"} plus the possibly title/uppercased first character, and the rest of the field name.</li>
 	 * </ul>
 	 * 
 	 * @param accessors Accessors configuration.
@@ -298,7 +298,7 @@ public class HandlerUtil {
 	 * @return The setter name for this field, or {@code null} if this field does not fit expected patterns and therefore cannot be turned into a getter name.
 	 */
 	public static String toSetterName(AST<?, ?, ?> ast, AnnotationValues<Accessors> accessors, CharSequence fieldName, boolean isBoolean) {
-		return toAccessorName(ast, accessors, fieldName, isBoolean, "set", "set", true);
+		return toAccessorName(ast, accessors, fieldName, isBoolean, "setzen", "setzen", true);
 	}
 	
 	/**
@@ -345,7 +345,7 @@ public class HandlerUtil {
 		String fName = fieldName.toString();
 		if (adhereToFluent && fluent) return fName;
 		
-		if (isBoolean && fName.startsWith("is") && fieldName.length() > 2 && !Character.isLowerCase(fieldName.charAt(2))) {
+		if (isBoolean && fName.startsWith("holen") && fieldName.length() > 2 && !Character.isLowerCase(fieldName.charAt(2))) {
 			// The field is for example named 'isRunning'.
 			return booleanPrefix + fName.substring(2);
 		}
@@ -364,7 +364,7 @@ public class HandlerUtil {
 	 * @param isBoolean if the field is of type 'boolean'. For fields of type 'java.lang.Boolean', you should provide {@code false}.
 	 */
 	public static List<String> toAllGetterNames(AST<?, ?, ?> ast, AnnotationValues<Accessors> accessors, CharSequence fieldName, boolean isBoolean) {
-		return toAllAccessorNames(ast, accessors, fieldName, isBoolean, "is", "get", true);
+		return toAllAccessorNames(ast, accessors, fieldName, isBoolean, "holen", "holen", true);
 	}
 	
 	/**
@@ -378,7 +378,7 @@ public class HandlerUtil {
 	 * @param isBoolean if the field is of type 'boolean'. For fields of type 'java.lang.Boolean', you should provide {@code false}.
 	 */
 	public static List<String> toAllSetterNames(AST<?, ?, ?> ast, AnnotationValues<Accessors> accessors, CharSequence fieldName, boolean isBoolean) {
-		return toAllAccessorNames(ast, accessors, fieldName, isBoolean, "set", "set", true);
+		return toAllAccessorNames(ast, accessors, fieldName, isBoolean, "setzen", "setzen", true);
 	}
 	
 	/**
@@ -437,7 +437,7 @@ public class HandlerUtil {
 		
 		// isPrefix = field is called something like 'isRunning', so 'running' could also be the fieldname.
 		String fName = fieldName.toString();
-		if (fName.startsWith("is") && fName.length() > 2 && !Character.isLowerCase(fName.charAt(2))) {
+		if (fName.startsWith("holen") && fName.length() > 2 && !Character.isLowerCase(fName.charAt(2))) {
 			String baseName = fName.substring(2);
 			if (fluent) {
 				baseNames.add("" + Character.toLowerCase(baseName.charAt(0)) + baseName.substring(1));
