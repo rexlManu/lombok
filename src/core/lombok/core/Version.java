@@ -42,7 +42,7 @@ public class Version {
     //   Envious Ferret
 
     private Version() {
-        //Prevent instantiation
+        //Prevent
     }
 
     /**
